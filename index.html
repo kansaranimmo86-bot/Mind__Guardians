@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindGuardians - Student Mental Health Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ========== RENUE-INSPIRED COLOR SCHEME ========== */
+        :root {
+            --primary: #1a361a;    /* Dark Green */
+            --secondary: #2e5d2e;  /* Medium Dark Green */
+            --accent: #3c7b3c;     /* Medium Green */
+            --light: #f8f9fa;      /* Very Light Gray */
+            --dark: #1a361a;       /* Darkest Green */
+            --text: #212121;       /* Dark Gray for text */
+            --text-light: #616161; /* Medium Gray */
+            --emergency: #e74c3c;  /* Emergency Red */
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--light);
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-accent {
+            background-color: var(--accent);
+        }
+        .btn-accent:hover {
+            background-color: #4caf50;
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 12px 24px;
+        }
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        section {
+            padding: 80px 0;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .logo span {
+            color: var(--accent);
+        }
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2.2rem;
+            color: var(--primary);
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links li {
+            margin-left: 30px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        /* Hero Section */
+        .hero {
+            padding-top: 140px;
+            padding-bottom: 80px;
+            background: linear-gradient(135deg, white 0%, var(--light) 100%);
+            text-align: center;
+        }
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            color: var(--dark);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: var(--text-light);
+        }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+        .stats-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        /* About Section */
+        .about {
+            background-color: var(--light);
+        }
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        .about-text {
+            flex: 1;
+        }
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        .about-image {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        /* Features Section */
+        .features {
+            background-color: var(--light);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .feature-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        .feature-card h3 {
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-size: 1.5rem;
+        }
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        /* Resources Section */
+        .resources {
+            background-color: var(--light);
+        }
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .resource-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .resource-card:hover {
+            transform: translateY(-10px);
+        }
+        .resource-img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+        }
+        .resource-content {
+            padding: 25px;
+        }
+        .resource-content h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-size: 1.4rem;
+        }
+        .resource-content p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        /* Testimonials */
+        .testimonials {
+            background-color: var(--light);
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .testimonial-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+        }
+        .testimonial-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 25px;
+            position: relative;
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+        .testimonial-text::before {
+            content: """;
+            font-size: 3rem;
+            color: var(--primary);
+            position: absolute;
+            top: -20px;
+            left: -15px;
+            opacity: 0.3;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            text-align: center;
+            padding: 70px 0;
+        }
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+        }
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* Footer */
+        footer {
+            background-color: var(--light);
+            color: var(--text);
+            padding: 60px 0 30px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 12px;
+            color: var(--text-light);
+        }
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        /* Form Styles */
+        .form-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background-color: #fafafa;
+            color: var(--text);
+            font-size: 1rem;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .admin-section {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            background-color: var(--secondary);
+            border-radius: 15px;
+        }
+        .contact-list {
+            list-style: none;
+        }
+        .contact-list li {
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .contact-list li:last-child {
+            border-bottom: none;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            overflow: auto;
+        }
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: modalopen 0.5s;
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: #777;
+            cursor: pointer;
+        }
+        @keyframes modalopen {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* User Section */
+        .user-section {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        .user-info {
+            margin-bottom: 25px;
+        }
+        .user-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        /* Admin View Styles */
+        .admin-view {
+            display: none;
+            margin-top: 40px;
+            padding: 30px;
+            background-color: var(--secondary);
+            border-radius: 15px;
+        }
+        .admin-view h3 {
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+        .contact-item {
+            padding: 20px;
+            border-bottom: 1px solid #d1d5db;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+        /* ========== EMERGENCY SIDEBAR & MODAL ========== */
+        .emergency-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 100px;
+            background: var(--emergency);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            cursor: pointer;
+            z-index: 999;
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+        .emergency-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        #emergencyModal .modal-content {
+            max-width: 450px;
+            padding: 0;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #ff7675, var(--emergency));
+            color: white;
+        }
+        .emergency-header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        .emergency-body {
+            padding: 25px;
+            background: white;
+            color: #2d3748;
+            text-align: center;
+        }
+        .emergency-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 15px 0;
+            color: var(--emergency);
+            letter-spacing: 1px;
+        }
+        .busy-message {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid #ffeaa7;
+            font-weight: 500;
+        }
+        .alternative-support {
+            margin-top: 25px;
+        }
+        .alternative-support h4 {
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+        .support-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .support-btn {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .support-btn:hover {
+            transform: translateY(-2px);
+        }
+        .support-btn.chat {
+            background: #5b21b6;
+            color: white;
+        }
+        .support-btn.resource {
+            background: #00b894;
+            color: white;
+        }
+        .support-btn.breathing {
+            background: #0984e3;
+            color: white;
+        }
+        /* Breathing Animation for Emergency */
+        .breathing-guide {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .breathing-circle {
+            width: 100px;
+            height: 100px;
+            background: #0984e3;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            animation: breathe 4s infinite;
+        }
+        @keyframes breathe {
+            0% { transform: scale(1); background: #0984e3; }
+            50% { transform: scale(1.2); background: #74b9ff; }
+            100% { transform: scale(1); background: #0984e3; }
+        }
+        /* ========== CHATBOT MODAL STYLES ========== */
+        #chatbotModal {
+            z-index: 2000 !important;
+        }
+        #chatbotModal .modal-content {
+            max-width: 420px;
+            max-height: 85vh;
+            padding: 0;
+            border-radius: 18px;
+            background: white;
+            animation: chatModalOpen 0.4s ease-out;
+        }
+        @keyframes chatModalOpen {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .chat-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            background: #1a361a;
+            color: white;
+            padding: 18px 20px;
+            font-weight: 600;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #fafaff;
+        }
+        .message {
+            margin: 12px 0;
+            padding: 12px 16px;
+            border-radius: 18px;
+            max-width: 85%;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .user {
+            background: #1a361a;
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 6px;
+        }
+        .bot {
+            background: #f0f4ff;
+            color: #1f2937;
+            border-bottom-left-radius: 6px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .bot-avatar {
+            background: #1a361a;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+        .bot-content {
+            flex: 1;
+        }
+        .input-area {
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #eaeaea;
+            display: flex;
+            gap: 10px;
+        }
+        #msg-input {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 25px;
+            outline: none;
+            font-size: 15px;
+        }
+        #send-btn {
+            background: #1a361a;
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .loading {
+            display: flex;
+            gap: 5px;
+            padding: 12px 16px;
+            background: #f0f4ff;
+            border-radius: 18px;
+            width: fit-content;
+            margin: 12px 0;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #4b5563;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        .quick-btn {
+            background: #e0e7ff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            margin: 5px 5px 5px 0;
+            cursor: pointer;
+            font-size: 13px;
+            color: #1a361a;
+            transition: all 0.2s;
+        }
+        .quick-btn:hover {
+            background: #c7d2fe;
+        }
+        .resource-card {
+            background: #ecfdf5;
+            border-left: 4px solid #059669;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+        .mood-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .mood-btn {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .mood-btn:hover {
+            background: #e5e7eb;
+            transform: translateY(-1px);
+        }
+        a {
+            color: #1a361a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .about-content {
+                flex-direction: column;
+            }
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+                padding: 20px;
+            }
+            .emergency-btn {
+                bottom: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== ORIGINAL WEBSITE CONTENT ========== -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-brain logo-icon"></i>
+                    Mind<span>Guardians</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#features">What We Offer</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#testimonials">Success Stories</a></li>
+                    <li><a href="#" class="btn btn-accent" id="loginBtn">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeLogin">&times;</span>
+            <h2>Login to MindGuardians</h2>
+            <div class="form-container">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Login</button>
+                </form>
+                <p style="text-align: center; margin-top: 20px;">
+                    Don't have an account? <a href="#" id="showRegister" style="color: var(--accent);">Register here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeRegister">&times;</span>
+            <h2>Create an Account</h2>
+            <div class="form-container">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerName">Full Name</label>
+                        <input type="text" id="registerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <input type="password" id="registerPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userType">I am a:</label>
+                        <select id="userType" required>
+                            <option value="student">Student</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="adminCodeGroup" style="display: none;">
+                        <label for="adminCode">Admin Code</label>
+                        <input type="password" id="adminCode" placeholder="Enter admin code">
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Register</button>
+                </form>
+                <p style="text-align: center; margin-top: 20px;">
+                    Already have an account? <a href="#" id="showLogin" style="color: var(--accent);">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="user-section" id="userSection">
+                <div class="user-info">
+                    <h2>Welcome, <span id="userName">User</span>!</h2>
+                    <p>We're glad to have you here. How can we support you today?</p>
+                </div>
+                <button class="btn btn-accent" id="logoutBtn">Logout</button>
+            </div>
+            <div class="hero-content" id="heroContent">
+                <div class="stats">
+                </div>
+                <h1>Your Mental Health Matters</h1>
+                <p>MindGuardians helps students like you deal with stress, anxiety, and other challenges of college life.</p>
+                <a href="#" class="btn" id="mainGetHelp">💬 Get Support Now</a>
+                <a href="#features" class="btn btn-outline" style="margin-left: 15px;">Learn More</a>
+            </div>
+        </div>
+    </section>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About MindGuardians</h2>
+                <p>We are students helping students with mental health challenges</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Why We Started</h3>
+                    <p>College life can be tough. Between exams, assignments, and being away from home, many students feel stressed and alone.</p>
+                    <p>We created MindGuardians to provide a safe space where students can get mental health support from people who understand what they're going through.</p>
+                    <p>Our team includes fellow students and mental health professionals who work together to help you feel better.</p>
+                    <a href="#" class="btn">Meet Our Team</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&h=400" alt="Students studying together">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>How We Help</h2>
+                <p>MindGuardians offers different ways to support your mental health</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Hate Reporting</h3>
+                    <p>Safe and confidential system to report incidents of hate, discrimination, or bullying.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Self-Help Tools</h3>
+                    <p>Simple exercises and activities to manage stress and feel better.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Wellness Plans</h3>
+                    <p>Create a personal plan to improve your mental health step by step.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Resources Library</h3>
+                    <p>Easy-to-understand information about mental health for students.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Resources Section -->
+    <section id="resources" class="resources">
+        <div class="container">
+            <div class="section-title">
+                <h2>Helpful Resources</h2>
+                <p>Simple tools and information for common student challenges</p>
+            </div>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&h=150" alt="Stress Management" class="resource-img">
+                    <div class="resource-content">
+                        <h3>Dealing with Stress</h3>
+                        <p>Easy techniques to manage academic pressure and deadlines.</p>
+                        <a href="#" class="btn" style="padding: 8px 16px; font-size: 0.9rem;">Learn More</a>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=600&h=150" alt="Sleep Better" class="resource-img">
+                    <div class="resource-content">
+                        <h3>Better Sleep</h3>
+                        <p>Tips for improving sleep during busy college life.</p>
+                        <a href="#" class="btn" style="padding: 8px 16px; font-size: 0.9rem;">Learn More</a>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=150" alt="Making Friends" class="resource-img">
+                    <div class="resource-content">
+                        <h3>Making Friends</h3>
+                        <p>How to connect with others and build support networks.</p>
+                        <a href="#" class="btn" style="padding: 8px 16px; font-size: 0.9rem;">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Reach out to us for support or questions</p>
+            </div>
+            <!-- Contact Form -->
+            <div class="form-container">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="contactName">Your Name</label>
+                        <input type="text" id="contactName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email</label>
+                        <input type="email" id="contactEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" rows="5" required placeholder="Type your message here"></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+            <!-- Admin View Section (Hidden by default) -->
+            <div class="admin-view" id="adminView" style="display: none;">
+                <h3>All Contact Messages (Admin Only)</h3>
+                <div id="allMessages">
+                    <!-- Admin messages will appear here -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Success Stories</h2>
+                <p>Hear from students who have used MindGuardians</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&h=180" alt="Sonia Patel" class="testimonial-img">
+                    <div class="testimonial-text">
+                        <p>"I was nervous about asking for help, but MindGuardians made it easy. The person I chatted with really understood what I was going through."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            SM
+                        </div>
+                        <div>
+                            <h4>Sonia Patel.</h4>
+                            <p>Psychology Major</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&h=180" alt="Rohit Sharma" class="testimonial-img">
+                    <div class="testimonial-text">
+                        <p>"The breathing exercises helped me manage my anxiety before exams. I'm sleeping better and feeling more focused in class."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            JR
+                        </div>
+                        <div>
+                            <h4>Rohit Sharma.</h4>
+                            <p>Engineering Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&h=180" alt="Pinkey Gupta" class="testimonial-img">
+                    <div class="testimonial-text">
+                        <p>"I used to feel alone with my problems. MindGuardians showed me that many students face similar challenges and there are ways to feel better."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            AL
+                        </div>
+                        <div>
+                            <h4>Pinkey Gupta</h4>
+                            <p>International Student</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Get Support Today</h2>
+            <p>Talk to someone who understands. All services are private and designed for students.</p>
+            <a href="#" class="btn btn-accent" id="footerGetHelp">💬 Start Now</a>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>MindGuardians</h3>
+                    <p>Mental health support by students, for students.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#features">What We Offer</a></li>
+                        <li><a href="#resources">Resources</a></li>
+                        <li><a href="#testimonials">Success Stories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Help</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> help@mindguardians.org</li>
+                        <li><i class="fas fa-phone"></i> (800) 123-HELP</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Support</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 MindGuardians. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- ========== EMERGENCY MODAL ========== -->
+    <div id="emergencyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeEmergency">&times;</span>
+            <div class="emergency-header">
+                🆘 24/7 Mental Health Support (India)
+            </div>
+            <div class="emergency-body">
+                <p>Immediate help is available. Call any of these verified helplines:</p>
+                <div style="background: #fff9db; padding: 15px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #ffc107;">
+                    <div style="font-weight: 600; margin-bottom: 10px; color: #d35400;">
+                        📞 National Helplines (24x7)
+                    </div>
+                    <div style="margin-bottom: 8px;"><strong>Tele-MANAS</strong> — <a href="tel:14416" style="color: #e74c3c; text-decoration: none;">14416</a> / <a href="tel:18008914416" style="color: #e74c3c; text-decoration: none;">1800-891-4416</a></div>
+                    <div style="margin-bottom: 8px;"><strong>KIRAN Helpline</strong> — <a href="tel:18005990019" style="color: #e74c3c; text-decoration: none;">1800-599-0019</a></div>
+                    <div style="margin-bottom: 8px;"><strong>NIMHANS</strong> — <a href="tel:08046110007" style="color: #e74c3c; text-decoration: none;">080-46110007</a></div>
+                </div>
+                <div style="background: #e8f5e9; padding: 15px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #27ae60;">
+                    <div style="font-weight: 600; margin-bottom: 10px; color: #27ae60;">
+                        💚 Crisis & Emotional Support
+                    </div>
+                    <div style="margin-bottom: 8px;"><strong>Vandrevala Foundation</strong> — <a href="tel:9999666555" style="color: #e74c3c; text-decoration: none;">9999-666-555</a></div>
+                    <div style="margin-bottom: 8px;"><strong>Snehi</strong> — <a href="tel:9582208181" style="color: #e74c3c; text-decoration: none;">9582208181</a></div>
+                    <div style="margin-bottom: 8px;"><strong>OneLife</strong> — <a href="tel:7893078930" style="color: #e74c3c; text-decoration: none;">78930-78930</a></div>
+                </div>
+                <div style="background: #fadbd8; padding: 15px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #c0392b;">
+                    <div style="font-weight: 600; margin-bottom: 10px; color: #c0392b;">
+                        ❤️‍🩹 Suicide Prevention (24x7)
+                    </div>
+                    <div><strong>AASRA</strong> — <a href="tel:912227546669" style="color: #e74c3c; text-decoration: none;">91-22-27546669</a> / <a href="tel:912227546667" style="color: #e74c3c; text-decoration: none;">91-22-27546667</a></div>
+                </div>
+                <div class="busy-message">
+                    <i class="fas fa-exclamation-triangle"></i> Lines may be busy. Don't give up — try another number or use our instant support below.
+                </div>
+                <div class="alternative-support">
+                    <h4>Need Instant Help? Try These:</h4>
+                    <div class="support-options">
+                        <button class="support-btn chat" id="emergencyChat">
+                            💬 Chat with Our Bot (Now)
+                        </button>
+                        <button class="support-btn breathing" id="startBreathing">
+                            🧘 Guided Breathing (Calm Now)
+                        </button>
+                        <button class="support-btn resource" id="viewResources">
+                            📚 View Self-Help Resources
+                        </button>
+                    </div>
+                </div>
+                <div class="breathing-guide" id="breathingGuide" style="display: none;">
+                    <div class="breathing-circle" id="breathingCircle">Breathe</div>
+                    <p>Follow the circle: Inhale as it grows, Exhale as it shrinks.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ========== CHATBOT MODAL ========== -->
+    <div id="chatbotModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeChat">&times;</span>
+            <div class="chat-container">
+                <div class="chat-header">
+                    <span>🧠</span>
+                    <span>Student Mental Health Assistant</span>
+                </div>
+                <div class="chat-body" id="chat-body">
+                    <div class="message bot">
+                        <div class="bot-avatar">💙</div>
+                        <div class="bot-content">
+                            Hello! I’m your mental health assistant. I can help with stress, anxiety, mood check-ins, or booking counselling.<br><br>
+                            <button class="quick-btn" onclick="quick('I want to book an appointment')">📅 Book Appointment</button>
+                            <button class="quick-btn" onclick="quick('I want to check my mood')">😊 Check Mood</button>
+                            <button class="quick-btn" onclick="quick('I need breathing exercises')">🧘 Breathing Exercises</button>
+                            <button class="quick-btn" onclick="quick('I need resources')">📚 Resources</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <input type="text" id="msg-input" placeholder="Share how you feel... I'm listening 💬" autocomplete="off">
+                    <button id="send-btn">➤</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ========== EMERGENCY BUTTON ========== -->
+    <div class="emergency-btn" id="emergencyBtn">
+        🆘
+    </div>
+    <!-- ========== MASTER JS — FIXED ALL ISSUES ========== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            const contactMessage = document.getElementById('contactMessage');
+            const adminView = document.getElementById('adminView');
+            const allMessages = document.getElementById('allMessages');
+            if (!localStorage.getItem('contactSubmissions')) {
+                localStorage.setItem('contactSubmissions', JSON.stringify([]));
+            }
+            function showAdminMessages() {
+                const submissions = JSON.parse(localStorage.getItem('contactSubmissions')) || [];
+                allMessages.innerHTML = '';
+                if (submissions.length === 0) {
+                    allMessages.innerHTML = '<p style="color:#bdc3c7; text-align:center;">No messages yet.</p>';
+                    return;
+                }
+                submissions.forEach((msg, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'contact-item';
+                    div.style.padding = '15px';
+                    div.style.borderBottom = '1px solid #4a6572';
+                    div.innerHTML = `
+                        <strong style="color:white;">${msg.name}</strong> <span style="color:#bdc3c7;">(${msg.email})</span><br>
+                        <p style="color:#ecf0f1; margin:10px 0;">${msg.message}</p>
+                        <small style="color:#bdc3c7;">${new Date(msg.date).toLocaleString()}</small><br>
+                        <button onclick="deleteMessage(${index})" style="margin-top:10px; background:#e74c3c; color:white; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; font-size:0.9rem;">Delete</button>
+                    `;
+                    allMessages.appendChild(div);
+                });
+                adminView.style.display = 'block';
+            }
+            window.deleteMessage = function(index) {
+                if (!confirm('Are you sure you want to delete this message?')) return;
+                let submissions = JSON.parse(localStorage.getItem('contactSubmissions')) || [];
+                submissions.splice(index, 1);
+                localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
+                showAdminMessages();
+            }
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('contactName').value.trim();
+                const email = document.getElementById('contactEmail').value.trim();
+                const message = contactMessage.value.trim();
+                if (!name || !email || !message) {
+                    alert('Please fill all fields.');
+                    return;
+                }
+                let submissions = JSON.parse(localStorage.getItem('contactSubmissions')) || [];
+                if (message.toLowerCase() === 'admin123') {
+                    showAdminMessages();
+                    alert('✅ Admin access granted! All messages are now visible.');
+                } else {
+                    const newMessage = {
+                        name: name,
+                        email: email,
+                        message: message,
+                        date: new Date().toISOString()
+                    };
+                    submissions.push(newMessage);
+                    localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
+                    alert('✅ Message sent successfully!');
+                }
+                contactForm.reset();
+            });
+            const loginBtn = document.getElementById('loginBtn');
+            const loginModal = document.getElementById('loginModal');
+            const closeLogin = document.getElementById('closeLogin');
+            const registerModal = document.getElementById('registerModal');
+            const closeRegister = document.getElementById('closeRegister');
+            const showRegister = document.getElementById('showRegister');
+            const showLogin = document.getElementById('showLogin');
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const userType = document.getElementById('userType');
+            const adminCodeGroup = document.getElementById('adminCodeGroup');
+            const userSection = document.getElementById('userSection');
+            const heroContent = document.getElementById('heroContent');
+            const userName = document.getElementById('userName');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const mainGetHelp = document.getElementById('mainGetHelp');
+            const footerGetHelp = document.getElementById('footerGetHelp');
+            if (!localStorage.getItem('users')) {
+                localStorage.setItem('users', JSON.stringify([]));
+            }
+            function checkLoginStatus() {
+                const user = JSON.parse(localStorage.getItem('currentUser'));
+                if (user) {
+                    userSection.style.display = 'block';
+                    heroContent.style.marginTop = '40px';
+                    userName.textContent = user.name;
+                    loginBtn.textContent = 'Logout';
+                } else {
+                    userSection.style.display = 'none';
+                    heroContent.style.marginTop = '0';
+                    loginBtn.textContent = 'Login';
+                }
+            }
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const user = users.find(u => u.email === email && u.password === password);
+                if (user) {
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    checkLoginStatus();
+                    loginModal.style.display = 'none';
+                    alert('✅ Login successful!');
+                } else {
+                    alert('❌ Invalid email or password.');
+                }
+            });
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('registerName').value;
+                const email = document.getElementById('registerEmail').value;
+                const password = document.getElementById('registerPassword').value;
+                const type = userType.value;
+                const adminCode = document.getElementById('adminCode').value;
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                if (type === 'admin' && adminCode !== 'mind123') {
+                    alert('❌ Invalid admin code.');
+                    return;
+                }
+                if (users.some(u => u.email === email)) {
+                    alert('❌ Email already registered.');
+                    return;
+                }
+                const newUser = { name, email, password, type };
+                users.push(newUser);
+                localStorage.setItem('users', JSON.stringify(users));
+                localStorage.setItem('currentUser', JSON.stringify(newUser));
+                checkLoginStatus();
+                registerModal.style.display = 'none';
+                alert(`✅ Registration successful! Welcome, ${name}`);
+            });
+            userType.addEventListener('change', function() {
+                adminCodeGroup.style.display = userType.value === 'admin' ? 'block' : 'none';
+            });
+            logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('currentUser');
+                checkLoginStatus();
+                alert('✅ Logged out successfully.');
+            });
+            loginBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const user = JSON.parse(localStorage.getItem('currentUser'));
+                if (user) {
+                    localStorage.removeItem('currentUser');
+                    checkLoginStatus();
+                } else {
+                    loginModal.style.display = 'block';
+                }
+            });
+            closeLogin.addEventListener('click', () => loginModal.style.display = 'none');
+            closeRegister.addEventListener('click', () => registerModal.style.display = 'none');
+            showRegister.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginModal.style.display = 'none';
+                registerModal.style.display = 'block';
+            });
+            showLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                registerModal.style.display = 'none';
+                loginModal.style.display = 'block';
+            });
+            const chatbotModal = document.getElementById('chatbotModal');
+            const closeChat = document.getElementById('closeChat');
+            const chatBody = document.getElementById('chat-body');
+            const msgInput = document.getElementById('msg-input');
+            const sendBtn = document.getElementById('send-btn');
+            mainGetHelp.addEventListener('click', function(e) {
+                e.preventDefault();
+                chatbotModal.style.display = 'block';
+                setTimeout(() => msgInput.focus(), 300);
+            });
+            footerGetHelp.addEventListener('click', function(e) {
+                e.preventDefault();
+                chatbotModal.style.display = 'block';
+                setTimeout(() => msgInput.focus(), 300);
+            });
+            closeChat.addEventListener('click', () => chatbotModal.style.display = 'none');
+            window.addEventListener('click', function(e) {
+                if (e.target === chatbotModal) chatbotModal.style.display = 'none';
+            });
+            window.quick = function(text) {
+                msgInput.value = text;
+                handleSend();
+            };
+            function detectLang(text) {
+                if (/[\u0900-\u097F]/.test(text)) return 'hi';
+                if (/[\u0600-\u06FF]/.test(text)) return 'ur';
+                return 'en';
+            }
+            function handleSend() {
+                const text = msgInput.value.trim();
+                if (!text) return;
+                const lang = detectLang(text);
+                addMessage(text, 'user');
+                const loadingId = showLoading();
+                setTimeout(() => {
+                    hideLoading(loadingId);
+                    generateReply(text, lang);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }, 600);
+                msgInput.value = '';
+            }
+            function generateReply(text, lang) {
+                text = text.toLowerCase();
+                if (text.includes('book') || text.includes('appointment')) {
+                    addMessage(lang === 'hi' ? 
+                        `✅ आपकी अपॉइंटमेंट कल शाम 4 बजे बुक हो गई है!<br>📍 कैंपस वेलनेस सेंटर, कमरा 205<br>📧 पुष्टि आपके छात्र ईमेल पर भेजी गई है।` :
+                        `✅ Your appointment is booked for tomorrow at 4 PM!<br>📍 Campus Wellness Center, Room 205<br>📧 Confirmation sent to your student email.`,
+                        'bot');
+                    return;
+                }
+                if (text.includes('mood') || text.includes('feeling')) {
+                    const content = (lang === 'hi' ? 
+                        `आज आप कैसा महसूस कर रहे हैं?<br><br>` : 
+                        `How are you feeling today?<br><br>`) +
+                        `<div class="mood-group">
+                            <button class="mood-btn" onclick="moodSelect('great', '${lang}')">😊 Great</button>
+                            <button class="mood-btn" onclick="moodSelect('okay', '${lang}')">🙂 Okay</button>
+                            <button class="mood-btn" onclick="moodSelect('stressed', '${lang}')">😔 Stressed</button>
+                            <button class="mood-btn" onclick="moodSelect('anxious', '${lang}')">😟 Anxious</button>
+                        </div>`;
+                    addMessage(content, 'bot');
+                    return;
+                }
+                const replies = {
+                    hi: [
+                        `धन्यवाद! 🤗 याद रखें: ठीक न होना भी ठीक है।`,
+                        `मैं आपके लिए यहाँ हूँ। 💜`,
+                        `आपकी बात सुनकर अच्छा लगा। 🌸`
+                    ],
+                    en: [
+                        `Thanks for sharing! 🤗 Remember: It’s okay to not be okay.`,
+                        `I’m here for you. 💜`,
+                        `I'm glad you reached out. 🌸`
+                    ]
+                };
+                const options = replies[lang] || replies.en;
+                addMessage(options[Math.floor(Math.random() * options.length)], 'bot');
+            }
+            window.moodSelect = function(mood, lang) {
+                const replies = {
+                    hi: {
+                        great: "यह बहुत अच्छा है! 🌈 कुछ छोटा सा मनाएं — शायद पसंदीदा स्नैक या गाना!",
+                        okay: "खुश हूँ कि आप ठीक हैं! 😊 2 मिनट की स्ट्रेच या वॉक ट्राई करें — मूड तुरंत बढ़ाता है!",
+                        stressed: "चलिए साथ में सांस लेते हैं: 4 सेकंड सांस लें → 4 सेकंड रोकें → 6 सेकंड सांस छोड़ें। 3 बार दोहराएं। आप यह कर सकते हैं। 💪",
+                        anxious: "5-4-3-2-1 ट्राई करें: 5 चीजें बताएं जो आप देख रहे हैं, 4 जो आप महसूस कर रहे हैं, 3 जो आप सुन रहे हैं, 2 जो आप सूंघ रहे हैं, 1 जो आप स्वाद ले रहे हैं। आप अभी सुरक्षित हैं। 🤗"
+                    },
+                    en: {
+                        great: "That’s wonderful! 🌈 Do something small to celebrate — maybe a favorite snack or song!",
+                        okay: "Glad you’re okay! 😊 Try a 2-min stretch or walk — boosts mood instantly!",
+                        stressed: "Let’s breathe together: Inhale 4s → Hold 4s → Exhale 6s. Repeat 3x. You’ve got this. 💪",
+                        anxious: "Try 5-4-3-2-1: Name 5 things you see, 4 things you feel, 3 things you hear, 2 things you smell, 1 thing you taste. You are safe right now. 🤗"
+                    }
+                };
+                const reply = replies[lang] && replies[lang][mood] || replies.en[mood] || "Thank you 💙";
+                addMessage(reply, 'bot');
+            };
+            function addMessage(text, sender) {
+                const div = document.createElement('div');
+                div.className = `message ${sender}`;
+                div.innerHTML = text;
+                chatBody.appendChild(div);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+            function showLoading() {
+                const id = 'loading-' + Date.now();
+                const div = document.createElement('div');
+                div.id = id;
+                div.className = 'loading';
+                div.innerHTML = `<div class="dot"></div><div class="dot"></div><div class="dot"></div>`;
+                chatBody.appendChild(div);
+                chatBody.scrollTop = chatBody.scrollHeight;
+                return id;
+            }
+            function hideLoading(id) {
+                const el = document.getElementById(id);
+                if (el) el.remove();
+            }
+            sendBtn.addEventListener('click', handleSend);
+            msgInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') handleSend();
+            });
+            const emergencyBtn = document.getElementById('emergencyBtn');
+            const emergencyModal = document.getElementById('emergencyModal');
+            const closeEmergency = document.getElementById('closeEmergency');
+            const emergencyChat = document.getElementById('emergencyChat');
+            const startBreathing = document.getElementById('startBreathing');
+            const viewResources = document.getElementById('viewResources');
+            const breathingGuide = document.getElementById('breathingGuide');
+            const breathingCircle = document.getElementById('breathingCircle');
+            let breathingInterval;
+            // SOS Button Click Handler
+            emergencyBtn.addEventListener('click', function() {
+                emergencyModal.style.display = 'block';
+            });
+            closeEmergency.addEventListener('click', function() {
+                emergencyModal.style.display = 'none';
+                if (breathingInterval) {
+                    clearInterval(breathingInterval);
+                    breathingGuide.style.display = 'none';
+                }
+            });
+            window.addEventListener('click', function(e) {
+                if (e.target === emergencyModal) {
+                    emergencyModal.style.display = 'none';
+                    if (breathingInterval) {
+                        clearInterval(breathingInterval);
+                        breathingGuide.style.display = 'none';
+                    }
+                }
+            });
+            emergencyChat.addEventListener('click', function() {
+                emergencyModal.style.display = 'none';
+                chatbotModal.style.display = 'block';
+                setTimeout(() => {
+                    addMessage("I'm here for you right now. What do you need?", 'bot');
+                    msgInput.focus();
+                }, 300);
+            });
+            startBreathing.addEventListener('click', function() {
+                breathingGuide.style.display = 'block';
+                let scale = 1;
+                let growing = true;
+                if (breathingInterval) clearInterval(breathingInterval);
+                breathingInterval = setInterval(() => {
+                    if (growing) {
+                        scale += 0.02;
+                        if (scale >= 1.2) growing = false;
+                    } else {
+                        scale -= 0.02;
+                        if (scale <= 1) growing = true;
+                    }
+                    breathingCircle.style.transform = `scale(${scale})`;
+                    breathingCircle.style.background = growing ? '#0984e3' : '#74b9ff';
+                }, 50);
+            });
+            viewResources.addEventListener('click', function() {
+                emergencyModal.style.display = 'none';
+                document.getElementById('resources').scrollIntoView({ behavior: 'smooth' });
+            });
+            checkLoginStatus();
+        });
+    </script>
+</body>
+</html>
